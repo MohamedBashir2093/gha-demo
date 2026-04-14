@@ -7,5 +7,5 @@ jobs:
       - name: Heloo Step
         run: |
           echo "Welcome to GHA"
-            echo "Welcome to DCA"
+          echo "Welcome to DCA"
   
