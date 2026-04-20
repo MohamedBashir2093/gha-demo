@@ -1,22 +1,10 @@
-name: inputs demo
-on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: chose environment to deploy
-        type: choice
-        required: true
-        default: dev
-        options:
-          - dev
-          - test
-          - prod
-      artifact_tag:
-          description: choose the git tag to deploy
-          required: true
-jobs:
-  inputs-demo:
+name: context-demo s
+on: push
+jobs: 
+  context-demo:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy the app
-        run: echo "deploying this ${{ inputs.artifact_tag }} application to ${{ inputs.environment }}"
+      - name: conext
+        run: |
+          echo "this is trigered by ${{github.actor}}" 
+          echo "the repo is ${{github.repository}}"
