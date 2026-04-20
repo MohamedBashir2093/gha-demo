@@ -1,19 +1,22 @@
-name: Deploy HTML to S3 
-on: push
+name: inputs demo
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: chose environment to deploy
+        type: choice
+        required: true
+        default: dev
+        options:
+          - dev
+          - test
+          - prod
+      artifact_tag:
+          description: choose the git tag to deploy
+          required: true
 jobs:
-  deploy:
+  inputs-demo:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-      - name: aws-config
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-region: us-east-1
-      - name: code static code tos3
-        run: |
-          aws s3 sync ./ s3://hirab-bashir-static-site-9823746/ \
-          --exclude "*" \
-          --include "index.html"
+      - name: Deploy the app
+        run: echo "deploying this ${{ inputs.artifact_tag }} application to ${{ inputs.environment }}"
